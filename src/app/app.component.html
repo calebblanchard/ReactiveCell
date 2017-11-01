@@ -1,0 +1,40 @@
+<div *ngIf="!name; else forminfo">
+  <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
+    <div class="form-container">
+      <div class="row columns">
+        <h1>Reactive Cell Phone # Collector Form</h1>
+
+        <label>Name</label>
+        <input type="text" formControlName="name">
+        <div class="alert" *ngIf="!rForm.controls['name'].valid && rForm.controls['name'].touched">
+          {{ titleAlert }}
+        </div>
+        <br/>
+
+        <label>Cell Phone #</label>
+        <input type="text" formControlName="cellNum"/>
+        <div class="alert" *ngIf="!rForm.controls['cellNum'].valid && rForm.controls['cellNum'].touched">
+          {{ cellNumAlert }}
+        </div>
+        <br/>
+
+        <input type="submit" class="button expanded" value="Submit Form" [disabled]="!rForm.valid">
+      </div>
+    </div>
+  </form>
+</div>
+
+<ng-template #forminfo>
+  <div class="form-container">
+    <div class="row columns">
+      <p>
+        <strong>Your name:</strong>
+        <em>{{ name }}</em>
+      </p>
+      <p>
+        <strong>Your cell phone #:</strong>
+        <em>{{ cellNum }}</em>
+      </p>
+    </div>
+  </div>
+</ng-template>
